@@ -1,17 +1,16 @@
-package org.rundeck.plugins;
+package org.rundeck.plugins.notification;
 
 import com.dtolabs.rundeck.core.plugins.Plugin;
 import com.dtolabs.rundeck.plugins.descriptions.PluginDescription;
 import com.dtolabs.rundeck.plugins.descriptions.PluginProperty;
 import com.dtolabs.rundeck.plugins.notification.NotificationPlugin;
-import org.jibble.pircbot.IrcException;
-import org.jibble.pircbot.NickAlreadyInUseException;
 import org.jibble.pircbot.PircBot;
 
-import java.io.IOException;
-import java.util.Arrays;
 import java.util.Map;
 
+/**
+ * IRC Notification Plugin
+ */
 @Plugin(service = "Notification", name = "IRC")
 @PluginDescription(title = "IRC Notification Plugin", description = "Send job notifications to an IRC channel.")
 public class IrcNotification implements NotificationPlugin {
@@ -28,8 +27,6 @@ public class IrcNotification implements NotificationPlugin {
 
     @Override
     public boolean postNotification(String trigger, Map executionData, Map config) {
-        System.err.printf("Trigger %s fired for %s, configuration: %s\n", trigger, executionData, config);
-        System.err.printf("Channel is: %s\n", channel);
 
         IrcBot bot = new IrcBot();
         bot.setVerbose(true);
@@ -50,6 +47,12 @@ public class IrcNotification implements NotificationPlugin {
         return true;
     }
 
+    /**
+     * Format the message to send
+     * @param trigger Job trigger event
+     * @param executionData    Job execution data
+     * @return String formatted with job data
+     */
     private String generateMessage(String trigger, Map executionData) {
         Object job = executionData.get("job");
         Map jobdata = (Map) job;
@@ -65,6 +68,9 @@ public class IrcNotification implements NotificationPlugin {
         return null == string || "".equals(string);
     }
 
+    /**
+     * The RundeckBot
+     */
     public class IrcBot extends PircBot {
         public IrcBot() {
             setName("RundeckBot");

@@ -9,7 +9,7 @@ ext.rundeckPluginVersion= '1.1'
  * Set this to a comma-separated list of full classnames of your implemented Rundeck
  * plugins.
  */
-ext.pluginClassNames='org.rundeck.plugins.IrcNotification'
+ext.pluginClassNames='org.rundeck.plugins.notification.IrcNotification'
 
 
 repositories {
