@@ -30,8 +30,13 @@ Then restart the Rundeck service.
 ## Usage
 
 To use the plugin, configure your job to send a notification
-for on start, success or failure. The example job below
-sends a notification on start:
+for on start, success or failure.
+There are just two configuration properties for the plugin:
+
+* server: The IRC server host (eg, irc.acme.com).
+* channel: The IRC channel name (eg "#mychannel")
+
+The example job below sends a notification on start:
 
 ```YAML
 - id: a3528977-cc67-4d50-97d4-729845c643b9
@@ -44,7 +49,6 @@ sends a notification on start:
     keepgoing: false
     strategy: node-first
     commands:
-    - exec: echo "${option.message}"
     - script: |-
         #!/usr/bin/env python
         print 'this is a python script'
