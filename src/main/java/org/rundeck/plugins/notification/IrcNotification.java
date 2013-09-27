@@ -60,7 +60,7 @@ public class IrcNotification implements NotificationPlugin {
         Object jobname = jobdata.get("name");
         String jobdesc = (!isBlank(groupPath.toString()) ? groupPath + "/" : "") + jobname;
 
-        return "[" + trigger.toUpperCase() + "] " + jobdesc + " run by " + executionData.get("user") + ": " +
+        return "[" + trigger.toUpperCase() + "] \"" + jobdesc + "\" run by " + executionData.get("user") + ": " +
                 executionData.get("href");
     }
 
