@@ -20,6 +20,9 @@ public class IrcNotification implements NotificationPlugin {
 
     @PluginProperty(name = "channel", title = "IRC channel", description = "The IRC channel to join")
     private String channel;
+    
+    @PluginProperty(name = "chankey", title = "Channel Key", description = "The IRC channel key")
+    private String chankey;
 
     public IrcNotification() {
 
@@ -34,7 +37,7 @@ public class IrcNotification implements NotificationPlugin {
 
             bot.connect(server);
             bot.setAutoNickChange(true);
-            bot.joinChannel(channel);
+            bot.joinChannel(channel, chankey);
             bot.sendPrivMessage(trigger, executionData);
 
         } catch (Exception e) {
